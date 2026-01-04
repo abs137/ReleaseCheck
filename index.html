@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Price Check</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --secondary: #64748b;
+      --radius: 12px;
+      --shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 16px;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(135deg, #e0ecff, #f9fafc);
+      color: var(--text);
+    }
+
+    .card {
+      max-width: 600px;
+      margin: auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    input {
+      flex: 1 1 220px;
+      min-width: 160px;
+      padding: 12px;
+      font-size: 1.1rem;
+      border-radius: var(--radius);
+      border: 1px solid #e2e8f0;
+    }
+
+    button {
+      padding: 12px 18px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.05rem;
+    }
+
+    .secondary {
+      background: var(--secondary);
+    }
+
+    /* ----------- RESULT DISPLAY ----------- */
+    #message {
+      margin-top: 20px;
+      min-height: 44px;
+    }
+
+    .result-row {
+      font-size: 1.6rem;
+      margin-top: 6px;
+    }
+
+    .result-id {
+      font-weight: 500;
+      margin-right: 8px;
+      color: #334155;
+    }
+
+    .result-price {
+      font-weight: 800;
+      color: #0f172a;
+      font-size: 2.6rem;   /* BIG price */
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* ----------- SCANNER ----------- */
+    #scannerWrap {
+      display: none;
+      margin-top: 16px;
+      border-radius: var(--radius);
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      padding: 10px;
+    }
+
+    #qr-reader {
+      max-width: 320px;
+      margin: auto;
+    }
+
+    #torchControls {
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Price Check</h1>
+
+    <!-- Search -->
+    <form id="searchForm">
+      <input id="id" type="text" placeholder="Enter or scan SKU" autocomplete="off" />
+      <button type="submit">Search</button>
+      <button type="button" id="scanBtn" class="secondary">📷 Scan</button>
+    </form>
+
+    <!-- RESULT -->
+    <div id="message">
+      <span class="muted">Ready. Scan or enter SKU.</span>
+    </div>
+
+    <!-- CAMERA -->
+    <div id="scannerWrap">
+      <div id="qr-reader"></div>
+
+      <div id="torchControls">
+        <button id="torchToggleBtn" type="button" class="secondary">
+          💡 Flashlight
+        </button>
+      </div>
+
+      <div style="margin-top:10px;">
+        <button id="stopScanBtn" type="button" class="secondary">
+          Stop Camera
+        </button>
+      </div>
+    </div>
+
+    <!-- Dummy (JS compatibility) -->
+    <div id="binsGrid" style="display:none"></div>
+  </div>
+
+  <!-- LIBRARIES -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+
+  <!-- MAIN LOGIC -->
+  <script src="script.js?v=1"></script>
+
+</body>
+</html>
